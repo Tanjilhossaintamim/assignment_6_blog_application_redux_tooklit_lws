@@ -1,41 +1,41 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getBlogs } from "./blogsApi";
+import { getSingelBlog } from "./blogApi";
 
 const initialState = {
   isLoading: false,
   isError: false,
-  blogs: [],
+  blog: {},
   error: "",
 };
 
-const blogsSlice = createSlice({
-  name: "blogs",
+const singelBlogSlice = createSlice({
+  name: "singelblogs",
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fetchBlogs.pending, (state) => {
+      .addCase(fetchBlog.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
         state.error = "";
       })
-      .addCase(fetchBlogs.fulfilled, (state, action) => {
+      .addCase(fetchBlog.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
-        state.blogs = action.payload;
+        state.blog = action.payload;
       })
-      .addCase(fetchBlogs.rejected, (state, action) => {
+      .addCase(fetchBlog.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.error = action.error?.message;
-        state.blogs = [];
+        state.blog = {};
       });
   },
 });
 
 // thunk
-export const fetchBlogs = createAsyncThunk("blogs/fetchBlogs", async () => {
-  const blogs = await getBlogs();
-  return blogs;
+export const fetchBlog = createAsyncThunk("blog/fetchBlog", async (id) => {
+  const blog = await getSingelBlog(id);
+  return blog;
 });
 
-export default blogsSlice.reducer;
+export default singelBlogSlice.reducer;

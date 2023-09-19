@@ -1,35 +1,42 @@
-const PostDescription = () => {
+import PropTypes from "prop-types";
+const PostDescription = ({ blog }) => {
+  const { title, tags, isSaved, likes, description } = blog || {};
+
   return (
     <div>
       <h1 className="mt-6 text-2xl post-title" id="lws-singleTitle">
-        MERN stack for Web Development
+        {title}
       </h1>
       <div className="tags" id="lws-singleTags">
-        <span>#python,</span> <span>#tech,</span> <span>#git</span>
+        {tags?.length > 0 &&
+          tags.map((tag, i) => <span key={i}>#{tag}, </span>)}
       </div>
       <div className="btn-group">
         {/* <!-- handle like on button click --> */}
         <button className="like-btn" id="lws-singleLinks">
-          <i className="fa-regular fa-thumbs-up"></i> 100
+          <i className="fa-regular fa-thumbs-up"></i> {likes}
         </button>
         {/* <!-- handle save on button click -->
       <!-- use ".active" class and "Saved" text  if a post is saved, other wise "Save" --> */}
-        <button className="active save-btn" id="lws-singleSavedBtn">
-          <i className="fa-regular fa-bookmark"></i> Saved
-        </button>
+        {isSaved ? (
+          <button className="active save-btn" id="lws-singleSavedBtn">
+            <i className="fa-regular fa-bookmark"></i> Saved
+          </button>
+        ) : (
+          <button className="save-btn" id="lws-singleSavedBtn">
+            <i className="fa-regular fa-bookmark"></i> Save
+          </button>
+        )}
       </div>
       <div className="mt-6">
-        <p>
-          A MERN stack comprises a collection of four frameworks (MongoDB,
-          ExpressJs, ReactJs and NodeJs) used to develop full-stack javascript
-          solutions for rapid, scalable, and secure applications. Each framework
-          serves a different purpose in creating successful web applications. It
-          is an excellent choice for companies looking to develop high-quality
-          responsive applications quickly using just one language.
-        </p>
+        <p>{description}</p>
       </div>
     </div>
   );
+};
+
+PostDescription.propTypes = {
+  blog: PropTypes.object,
 };
 
 export default PostDescription;

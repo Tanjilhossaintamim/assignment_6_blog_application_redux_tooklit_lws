@@ -1,18 +1,22 @@
 import PostDescription from "./PostDescription";
-import PostImage from "../../assets/mern.webp";
-
-const PostDetails = () => {
+import PropTypes from "prop-types";
+const PostDetails = ({ blog }) => {
+  const { image, title } = blog || {};
   return (
     <main className="post">
       <img
-        src={PostImage}
-        alt="githum"
+        src={image}
+        alt={title}
         className="w-full rounded-md"
         id="lws-megaThumb"
       />
-      <PostDescription />
+      <PostDescription blog={blog} />
     </main>
   );
+};
+
+PostDetails.propTypes = {
+  blog: PropTypes.object,
 };
 
 export default PostDetails;

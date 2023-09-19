@@ -1,25 +1,33 @@
 import { Link } from "react-router-dom";
-import RelatePostImg from "../../assets/git.webp";
-const RelatedPost = () => {
+import PropTypes from "prop-types";
+
+const RelatedPost = ({ blog }) => {
+  const { id, title, image, tags, createdAt } = blog || {};
+
   return (
     <div className="card">
-      <Link to={`/blogs/1`}>
-        <img src={RelatePostImg} className="card-image" alt="" />
+      <Link to={`/blogs/${id}`}>
+        <img src={image} className="card-image" alt="" />
       </Link>
       <div className="p-4">
         <Link
-          to={`/blogs/1`}
+          to={`/blogs/${id}`}
           className="text-lg post-title lws-RelatedPostTitle"
         >
-          Top Github Alternatives
+          {title}
         </Link>
         <div className="mb-0 tags">
-          <span>#python,</span> <span>#tech,</span> <span>#git</span>
+          {tags?.length > 0 &&
+            tags.map((tag, i) => <span key={i}>#{tag},</span>)}
         </div>
-        <p>2010-03-27</p>
+        <p>{createdAt}</p>
       </div>
     </div>
   );
+};
+
+RelatedPost.propTypes = {
+  blog: PropTypes.object,
 };
 
 export default RelatedPost;

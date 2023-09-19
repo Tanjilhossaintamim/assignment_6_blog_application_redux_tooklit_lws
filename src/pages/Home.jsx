@@ -1,4 +1,4 @@
-import Posts from "../components/Posts/Posts";
+import Blogs from "../components/Blogs/Blogs";
 import SideBar from "../components/SideBar/SideBar";
 
 const Home = () => {
@@ -6,7 +6,7 @@ const Home = () => {
     <section className="wrapper">
       <SideBar />
 
-      <Posts />
+      <Blogs />
     </section>
   );
 };

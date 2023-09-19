@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const Post = ({ blog }) => {
   const { id, title, image, tags, isSaved, createdAt, likes } = blog || {};
@@ -34,6 +35,9 @@ const Post = ({ blog }) => {
       </div>
     </div>
   );
+};
+Post.propTypes = {
+  blog: PropTypes.object,
 };
 
 export default Post;

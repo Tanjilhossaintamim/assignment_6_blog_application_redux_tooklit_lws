@@ -33,9 +33,12 @@ const blogsSlice = createSlice({
 });
 
 // thunk
-export const fetchBlogs = createAsyncThunk("blogs/fetchBlogs", async () => {
-  const blogs = await getBlogs();
-  return blogs;
-});
+export const fetchBlogs = createAsyncThunk(
+  "blogs/fetchBlogs",
+  async ({ name, sortValue }) => {
+    const blogs = await getBlogs({ name, sortValue });
+    return blogs;
+  }
+);
 
 export default blogsSlice.reducer;

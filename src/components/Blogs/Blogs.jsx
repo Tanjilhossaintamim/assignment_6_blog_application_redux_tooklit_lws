@@ -10,7 +10,7 @@ const Posts = () => {
   );
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchBlogs());
+    dispatch(fetchBlogs({ name: "", sortValue: "" }));
   }, [dispatch]);
   // decisition making which content will show
   let content;

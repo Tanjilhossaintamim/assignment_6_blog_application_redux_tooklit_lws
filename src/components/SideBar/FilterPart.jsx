@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { fetchBlogs } from "../../redux/features/blogs/blogsSlice";
 
 const FilterPart = () => {
   const [radio, setRadio] = useState("all");
+  const dispatch = useDispatch();
   const handelChangeRadioButton = (name) => {
     setRadio(name);
+    dispatch(fetchBlogs({ name, sortValue: "" }));
   };
   return (
     <div className="sidebar-content">

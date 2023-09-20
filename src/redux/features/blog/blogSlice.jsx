@@ -11,6 +11,11 @@ const initialState = {
 const singelBlogSlice = createSlice({
   name: "singelblogs",
   initialState,
+  reducers: {
+    add_like: (state) => {
+      state.blog.likes += 1;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchBlog.pending, (state) => {
@@ -31,6 +36,8 @@ const singelBlogSlice = createSlice({
       });
   },
 });
+
+export const { add_like } = singelBlogSlice.actions;
 
 // thunk
 export const fetchBlog = createAsyncThunk("blog/fetchBlog", async (id) => {

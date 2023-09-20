@@ -1,8 +1,16 @@
 import PropTypes from "prop-types";
-
+import { useDispatch } from "react-redux";
+import { addlike } from "../../redux/features/like/addLikeSlice";
+import { add_like } from "../../redux/features/blog/blogSlice";
 
 const PostDescription = ({ blog }) => {
-  const { title, tags, isSaved, likes, description } = blog || {};
+  const { id, title, tags, isSaved, likes, description } = blog || {};
+  const dispatch = useDispatch();
+
+  const handelAddlikes = () => {
+    dispatch(addlike({ id, likes }));
+    dispatch(add_like());
+  };
 
   return (
     <div>
@@ -15,7 +23,11 @@ const PostDescription = ({ blog }) => {
       </div>
       <div className="btn-group">
         {/* <!-- handle like on button click --> */}
-        <button className="like-btn" id="lws-singleLinks">
+        <button
+          className="like-btn"
+          id="lws-singleLinks"
+          onClick={handelAddlikes}
+        >
           <i className="fa-regular fa-thumbs-up"></i> {likes}
         </button>
         {/* <!-- handle save on button click -->

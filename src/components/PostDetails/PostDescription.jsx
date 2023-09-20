@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { addlike } from "../../redux/features/like/addLikeSlice";
-import { add_like } from "../../redux/features/blog/blogSlice";
+import { add_like, save } from "../../redux/features/blog/blogSlice";
+import { saveBookMark } from "../../redux/features/save/saveSlice";
 
 const PostDescription = ({ blog }) => {
   const { id, title, tags, isSaved, likes, description } = blog || {};
@@ -10,6 +11,11 @@ const PostDescription = ({ blog }) => {
   const handelAddlikes = () => {
     dispatch(addlike({ id, likes }));
     dispatch(add_like());
+  };
+
+  const handelAddToBookmark = () => {
+    dispatch(saveBookMark({ id, isSaved }));
+    dispatch(save(isSaved));
   };
 
   return (
@@ -33,11 +39,19 @@ const PostDescription = ({ blog }) => {
         {/* <!-- handle save on button click -->
       <!-- use ".active" class and "Saved" text  if a post is saved, other wise "Save" --> */}
         {isSaved ? (
-          <button className="active save-btn" id="lws-singleSavedBtn">
+          <button
+            onClick={handelAddToBookmark}
+            className="active save-btn"
+            id="lws-singleSavedBtn"
+          >
             <i className="fa-regular fa-bookmark"></i> Saved
           </button>
         ) : (
-          <button className="save-btn" id="lws-singleSavedBtn">
+          <button
+            onClick={handelAddToBookmark}
+            className="save-btn"
+            id="lws-singleSavedBtn"
+          >
             <i className="fa-regular fa-bookmark"></i> Save
           </button>
         )}

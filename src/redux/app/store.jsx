@@ -3,6 +3,7 @@ import blogsSlice from "../features/blogs/blogsSlice";
 import singelBlogslice from "../features/blog/blogSlice";
 import relatedBlogsSlice from "../features/relatedBlog/relatedBlogsSlice";
 import addLikeSlice from "../features/like/addLikeSlice";
+import saveSlice from "../features/save/saveSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     singelBlog: singelBlogslice,
     relatedBlog: relatedBlogsSlice,
     like: addLikeSlice,
+    save: saveSlice,
   },
 });
 

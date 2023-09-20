@@ -15,6 +15,9 @@ const singelBlogSlice = createSlice({
     add_like: (state) => {
       state.blog.likes += 1;
     },
+    save: (state, action) => {
+      state.blog.isSaved = !action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -37,7 +40,7 @@ const singelBlogSlice = createSlice({
   },
 });
 
-export const { add_like } = singelBlogSlice.actions;
+export const { add_like, save } = singelBlogSlice.actions;
 
 // thunk
 export const fetchBlog = createAsyncThunk("blog/fetchBlog", async (id) => {
